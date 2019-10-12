@@ -1,0 +1,35 @@
+{
+    "manifest_version": 2,
+    "name": "Khôlle Style",
+    "version": "0.1",
+    "author": "AlbanSdl",
+    "homepage_url": "https://github.com/AlbanSdl/KholleStyle",
+
+    "description": "Changes behaviour of https://e-colle.lycee-berthelot.fr webpage.",
+
+    "icons": {
+        "48": "icons/icon-48.png"
+    },
+
+    "content_scripts": [
+        {
+            "matches": ["*://e-colle.lycee-berthelot.fr/*"],
+            "js": ["kholleStyle.js"]
+        }
+    ],
+
+    "permissions": ["storage"],
+
+    "applications": {
+        "gecko": {
+            "id": "kholleStyle@albansdl.fr"
+        }
+    },
+    
+    "options_ui": {
+        "page": "options.html",
+        "browser_style": true,
+        "chrome_style": true
+    }
+
+}

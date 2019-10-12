@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <meta charset="UTF-8"/>
+    <style>table{width:100%}b,i{display:block}body{font-size:14px}button{margin:10px 2px}input{vertical-align:middle;float:right}</style>
+</html>
+<body>
+    <form>
+        <h2>Choose custom colors<i style="display:block;font-weight:normal;font-size:14px">These colors will be used for designing the web page.</i></h2>
+        <table>
+            <tr>
+                <td>Background color</td>
+                <td><input type="color" id="backgroundColor"></td>
+            </tr>
+            <tr>
+                <td>Text color:<b>It's highly recommended to use a color visible on the background color defined above.</b></td>
+                <td><input type="color" id="textColor"></td>
+            </tr>
+            <tr>
+                <td>Accent 1 color:<i>This color will be mostly used for the main central header.</i></td>
+                <td><input type="color" id="accent1Color"></td>
+            </tr>
+            <tr>
+                <td>Accent 2 color:<i>This color will be used for the right hand side menu, for links and light elements.</i><b>It's recommended to use a color visible on the background color defined above.</b></td>
+                <td><input type="color" id="accent2Color"></td>
+            </tr>
+            <tr>
+                <td>Accent 3 color:<i>This color will appear in the main navigation buttons and when hovering the right hand side menu.</i><b>It's recommended to use a color visible on the background color defined above.</b></td>
+                <td><input type="color" id="accent3Color"></td>
+            </tr>
+            <tr>
+                <td>Accent 4 color:<i>This color will be used in special headers such as table's headers.</i></td>
+                <td><input type="color" id="accent4Color"></td>
+            </tr>
+        </table>
+        <button type="submit">Save</button>
+        <button id="reset">Reset colors</button>
+    </form>
+    <script src="options.js"></script>
+</body>
