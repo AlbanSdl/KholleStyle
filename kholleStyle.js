@@ -1,5 +1,4 @@
-const customColors = ["colorPrimary", "colorSecondary", "colorAccentOne", "colorAccentTwo", "colorAccentThree", "colorAccentFour"];
-var colorObject = {
+var colors = {
     colorPrimary: "#222222",
     colorSecondary: "#ffffff",
     colorAccentOne: "#cceaff",
@@ -7,21 +6,12 @@ var colorObject = {
     colorAccentThree: "#acddff",
     colorAccentFour: "#508ce2"
 };
-customColors.forEach((sColor) => {
-    browser.storage.local.get(sColor).then((option) => {
-        const isLastColor = sColor == customColors[customColors.length - 1];
-        if (option[sColor] != undefined) {
-            colorObject[sColor] = option[sColor];
-            if (isLastColor) performTransformation();
-        } else {
-            browser.storage.sync.get(sColor).then((option) => {
-                if (option[sColor] != undefined)
-                    colorObject[sColor] = option[sColor];
-                if (isLastColor) performTransformation();
-            });
-        }
+browser.storage.sync.get(Object.keys(colors)).then((option) => {
+    Object.keys(colors).forEach(key => {
+        if (option[key] != null) colors[key] = option[key];
+        if (key === Object.keys(colors).slice(-1)[0]) performTransformation(); // if last item
     });
-}).then();
+});
 
 function performTransformation() {
     const styleElement = document.createElement("style");
@@ -46,56 +36,56 @@ function performTransformation() {
     /* Applies colors */
     /* Color Primary */
     html, td:hover div.popup, td.matiere:hover  li.niveau1, td.colloscope:hover, td.matiere ul ul ul ul, td.matiere ul ul a, div.colle {
-        background: ${colorObject["colorPrimary"]}
+        background: ${colors.colorPrimary}
     }
     #header, .accueil, .accueil a, .accueil a:hover, #menu a:hover, .bouton a {
-        color: ${colorObject["colorPrimary"]}
+        color: ${colors.colorPrimary}
     }
     div#grise table.reservation td,div#grise table.reservation th, div#grise table.reservation tr, div#grise table.reservation, .couleur ul li, .photo, td.matiere ul.niveau3 li {
-        border: 1px solid ${colorObject["colorPrimary"]}
+        border: 1px solid ${colors.colorPrimary}
     }
     td.couleur {
-        border:1px solid ${colorObject["colorPrimary"]} !important
+        border:1px solid ${colors.colorPrimary} !important
     }
     .photo {
-        box-shadow: 2px 2px 4px ${colorObject["colorPrimary"]}
+        box-shadow: 2px 2px 4px ${colors.colorPrimary}
     }
 
     /* Color Secondary */
     html, #menu a, .info, .entete td, td.entete, .tableausimple th, td:hover div.popup, td.matiere ul ul ul ul, td.matiere ul ul a, td.matiere ul ul ul ul a, div.colle, footer {
-        color: ${colorObject["colorSecondary"]}
+        color: ${colors.colorSecondary}
     }
     .error {
-        background-color: ${colorObject["colorSecondary"]};
+        background-color: ${colors.colorSecondary};
     }
     .tableausimple td, th, td.matiere ul ul li:hover, .couleur ul li:hover {
-        border: 1px solid ${colorObject["colorSecondary"]}
+        border: 1px solid ${colors.colorSecondary}
     }
     div.colle, td:hover div.popup {
-        border: 2px solid ${colorObject["colorSecondary"]}
+        border: 2px solid ${colors.colorSecondary}
     }
 
     /* Color Accent 1 */
     #header {
-        background: ${colorObject["colorAccentOne"]}
+        background: ${colors.colorAccentOne}
     }
 
     /* Color Accent 2 */
     .accueil a, .bouton a, .bouton a:hover, .plusclair {
-        background: ${colorObject["colorAccentTwo"]}
+        background: ${colors.colorAccentTwo}
     }
 
     /* Color Accent 3 */
     .accueil li, .accueil td {
-        background: ${colorObject["colorAccentThree"]}
+        background: ${colors.colorAccentThree}
     }
     .accueil a:hover, #menu a:hover {
-        background: ${colorObject["colorAccentThree"]} !important
+        background: ${colors.colorAccentThree} !important
     }
 
     /* Color Accent 4 */
     #menu a, .entete td, td.entete, .tableausimple th, div#grise table.reservation {
-        background: ${colorObject["colorAccentFour"]};
+        background: ${colors.colorAccentFour};
     }
 
     /* Tweaked font size */

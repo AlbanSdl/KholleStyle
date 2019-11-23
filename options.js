@@ -1,13 +1,5 @@
 function saveOptions(e) {
     e.preventDefault();
-    browser.storage.local.set({
-        colorPrimary: document.querySelector("#backgroundColor").value,
-        colorSecondary: document.querySelector("#textColor").value,
-        colorAccentOne: document.querySelector("#accent1Color").value,
-        colorAccentTwo: document.querySelector("#accent2Color").value,
-        colorAccentThree: document.querySelector("#accent3Color").value,
-        colorAccentFour: document.querySelector("#accent4Color").value
-    });
     browser.storage.sync.set({
         colorPrimary: document.querySelector("#backgroundColor").value,
         colorSecondary: document.querySelector("#textColor").value,
