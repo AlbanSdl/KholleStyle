@@ -1,16 +1,27 @@
-// Retrieves colors stored in preferences and stores them in a list
-function getPreference(preferenceName, callbackFunction) {
-    browser.storage.sync.get(preferenceName).then((option) =>{callbackFunction(option[preferenceName])});
-};
 const customColors = ["colorPrimary", "colorSecondary", "colorAccentOne", "colorAccentTwo", "colorAccentThree", "colorAccentFour"];
-var colorObject = {};
+var colorObject = {
+    colorPrimary: "#222222",
+    colorSecondary: "#ffffff",
+    colorAccentOne: "#cceaff",
+    colorAccentTwo: "#A9B7C0",
+    colorAccentThree: "#acddff",
+    colorAccentFour: "#508ce2"
+};
 customColors.forEach((sColor) => {
-    getPreference(sColor, (color) => {
-        colorObject[sColor] = color;
-        if (Object.keys(colorObject).length === customColors.length)
-            performTransformation();
+    browser.storage.local.get(sColor).then((option) => {
+        const isLastColor = sColor == customColors[customColors.length - 1];
+        if (option[sColor] != undefined) {
+            colorObject[sColor] = option[sColor];
+            if (isLastColor) performTransformation();
+        } else {
+            browser.storage.sync.get(sColor).then((option) => {
+                if (option[sColor] != undefined)
+                    colorObject[sColor] = option[sColor];
+                if (isLastColor) performTransformation();
+            });
+        }
     });
-});
+}).then();
 
 function performTransformation() {
     const styleElement = document.createElement("style");
